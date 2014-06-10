@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{tikz,amsmath,siunitx}
+\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
+\usepackage[graphics,tightpage,active]{preview}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{amssymb}
+\newcommand\Scale{3}
+\newcommand\HEIGHT{54.5}
+\newcommand\WIDTH{90}
+\newcommand\HSPACEO{0.15cm}
+\newcommand\HSPACET{0.22cm}
+
+\newcommand\INDENT{1.00cm}
+
+\PreviewEnvironment{tikzpicture}
+\PreviewEnvironment{equation}
+\PreviewEnvironment{equation*}
+\newlength{\imagewidth}
+\newlength{\imagescale}
+\pagestyle{empty}
+\thispagestyle{empty}
+\begin{document}
+
+\begin{tikzpicture}[scale=1]
+
+%\draw[help lines] (0,0) grid (\WIDTH,\HEIGHT);
+%\pgftransformscale{0.9} %∑≈Àı
+
+%Stronger One-Round Authenticated Key Exchange in the RO model
+
+%Side
+\draw[-,color=black](26,\HEIGHT-3.5) -- (\WIDTH-28+0.8+0.4,\HEIGHT-3.5); %up
+\draw[-,color=black](26,31-0.5-0.2+6)       -- (\WIDTH-28+0.8+0.4,31-0.5-0.2+6)        ; %down
+\draw[-,color=black](26,31-0.5-0.2+6)       -- (26,\HEIGHT-3.5)      ; %left
+\draw[-,color=black](\WIDTH-28+0.8+0.4,31-0.5-0.2+6)  -- (\WIDTH-28+0.8+0.4,\HEIGHT-3.5) ; %right
+
+%mark
+%\draw[-,color=black](10,21)       -- (\WIDTH-10,21)        ; %mark
+%\draw[-,color=black](10,19)       -- (\WIDTH-10,19)        ; %mark
+
+%%Title
+%\draw (\WIDTH/2,\HEIGHT+0.5) node[scale=\Scale]
+%{ww\_model};
+
+%Two Pass
+%line 1 A <--> B
+\draw[-,color=white]
+(18.69+8,\HEIGHT-5.3)          node[left,color=black,scale=\Scale] {} --
+(18.70+8,\HEIGHT-5.3)        node[right,color=black,scale=\Scale] {
+$\hat{\mathbf{A}}$
+};
+\draw[-,color=white]
+(\WIDTH/2,\HEIGHT-5.3)    node[left,color=black,scale=\Scale] {} --
+(\WIDTH-39.25,\HEIGHT-5.3)node[right,color=black,scale=\Scale]{
+$\hat{\mathbf{B}}$
+};
+
+%CRS
+%\draw (\WIDTH/2,\HEIGHT-5.3) node[scale=\Scale]{CRS = \{$M$ $\in$ $Z_q^{n*m}$\}};
+
+%ephemeral secret key
+\draw[-,color=white]
+(18.69+8,\HEIGHT-7.3)          node[left,color=black,scale=\Scale] {} --
+(18.70+8,\HEIGHT-7.3)        node[right,color=black,scale=\Scale] {
+\textbf{x} $\leftarrow$ $\mathbb{Z}_q^{n}$, \textbf{e}$_A$ $\leftarrow$ $\chi^{m}$
+};
+\draw[-,color=white]
+(\WIDTH/2,\HEIGHT-7.3)    node[left,color=black,scale=\Scale] {} --
+(\WIDTH-39.25,\HEIGHT-7.3)node[right,color=black,scale=\Scale]{
+\textbf{y} $\leftarrow$ $\mathbb{D}_{\mathbb{Z}^m, s}$
+};
+
+\draw[-,color=white]
+(18.69+8,\HEIGHT-8.8)          node[left,color=black,scale=\Scale] {} --
+(18.70+8,\HEIGHT-8.8)        node[right,color=black,scale=\Scale] {
+\textbf{l}$_A$ = \textbf{$x^t$M} + \textbf{e}$_A^t$
+};
+\draw[-,color=white]
+(\WIDTH/2,\HEIGHT-8.8)    node[left,color=black,scale=\Scale] {} --
+(\WIDTH-39.25,\HEIGHT-8.8)node[right,color=black,scale=\Scale]{
+\textbf{r}$_B$ = \textbf{My}
+};
+
+%A --> B
+\begin{scope}[>=latex]
+\draw[->,line width=3pt] (39.25,\HEIGHT-12.8+1.5) -- (\WIDTH-39.25,\HEIGHT-12.8+1.5);
+\end{scope}
+%%up word
+\draw (\WIDTH/2,\HEIGHT-12.1+1.5) node[scale=\Scale]{$\hat{B}$, $\hat{A}$, \textbf{l}$_A$};
+
+%A <-- B
+\begin{scope}[>=latex]
+\draw[<-,line width=3pt] (39.25,\HEIGHT-15.3+1.5) -- (\WIDTH-39.25,\HEIGHT-15.3+1.5);
+\end{scope}
+%%up word
+\draw (\WIDTH/2,\HEIGHT-14.6+1.5) node[scale=\Scale]{$\hat{A}$, $\hat{B}$, \textbf{r}$_B$};
+
+\draw[-,color=white]
+(18.69+8,\HEIGHT-15.3)          node[left,color=black,scale=\Scale] {} --
+(18.70+8,\HEIGHT-15.3)        node[right,color=black,scale=\Scale] {
+
+};
+\draw[-,color=white]
+(\WIDTH-39.25,\HEIGHT-15.3)    node[left,color=black,scale=\Scale] {} --
+(\WIDTH-39.25,\HEIGHT-15.3)node[right,color=black,scale=\Scale]{
+
+};
+
+%L
+\draw[-,color=white]
+(18.69+8,\HEIGHT-16.8+1.5)          node[left,color=black,scale=\Scale] {} --
+(18.70+8,\HEIGHT-16.8+1.5)        node[right,color=black,scale=\Scale] {
+$SK_{A}$ = \textsf{round}(\textbf{$x^t$}\textbf{r}$_B$)
+};
+\draw[-,color=white]
+(\WIDTH/2,\HEIGHT-16.8+1.5)    node[left,color=black,scale=\Scale] {} --
+(\WIDTH-39.25,\HEIGHT-16.8+1.5)node[right,color=black,scale=\Scale]{
+$SK_{B}$ = \textsf{round}(\textbf{l}$_A^t$\textbf{y})
+};
+
+%\input{tpmbox}
+
+\draw[-,line width=1pt] (26,\HEIGHT-22.3-0.2+6) -- (\WIDTH-28+0.8+0.4,\HEIGHT-22.3-0.2+6);
+\draw (\WIDTH/2,\HEIGHT/2-21.8/2+31/2-0.5-0.2+6) node[scale=\Scale]
+{
+CRS = \{$\textbf{M}$ $\in$ $\mathbb{Z}_q^{n \times m}$\}
+};
+
+\end{tikzpicture}
+\end{document}
